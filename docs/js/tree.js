@@ -1,14 +1,15 @@
-import { GameObject } from "./gameObject.js";
-export class Tree extends GameObject {
-    constructor(tagName) {
-        super(tagName);
+import { Gameobject } from "./gameobject.js";
+export class Tree extends Gameobject {
+    constructor(screen) {
+        super("tree");
+        this.screen = screen;
         this.x = Math.floor(Math.random() * window.innerWidth) + window.innerWidth;
         this.y = 550;
     }
     update() {
         this.x -= 3;
         super.update();
-        if (this.x < -this.div.clientWidth) {
+        if (this.x < -this.element.clientWidth) {
             this.x = window.innerWidth;
         }
     }

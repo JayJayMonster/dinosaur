@@ -1,30 +1,29 @@
-import { GameObject } from "./gameObject.js";
-export class Player extends GameObject {
-    constructor(g) {
+import { Gameobject } from "./gameobject.js";
+export class Player extends Gameobject {
+    constructor(screen) {
         super("player");
         this.horizontalSpeed = 0;
-        this.gameOver = false;
         this.jumping = false;
         this.falling = false;
-        this.game = g;
+        this.screen = screen;
         window.addEventListener("keyup", (e) => this.onKeyUpHandler(e));
         window.addEventListener("keydown", (e) => this.onKeyDownHandler(e));
-        this.x = Math.floor(Math.random() * (window.innerWidth - this.div.clientWidth));
-        this.y = 600;
+        this.x = Math.floor(Math.random() * (window.innerWidth - this.element.clientWidth));
+        this.y = 550;
         this.health = 5;
     }
     update() {
         this.x += this.horizontalSpeed;
         if (this.jumping) {
-            if (this.y > 500) {
+            if (this.y > 450) {
                 this.y -= 4;
-                if (this.div.classList.contains("left")) {
-                    this.div.classList.add("jumpingLeft");
-                    this.div.classList.remove("left", "right", "jumpingRight");
+                if (this.element.classList.contains("left")) {
+                    this.element.classList.add("jumpingLeft");
+                    this.element.classList.remove("left", "right", "jumpingRight");
                 }
-                else if (this.div.classList.contains("right")) {
-                    this.div.classList.add("jumpingRight");
-                    this.div.classList.remove("right", "left", "jumpingLeft");
+                else if (this.element.classList.contains("right")) {
+                    this.element.classList.add("jumpingRight");
+                    this.element.classList.remove("right", "left", "jumpingLeft");
                 }
             }
             else {
@@ -33,7 +32,7 @@ export class Player extends GameObject {
             }
         }
         if (this.falling) {
-            if (this.y < 600) {
+            if (this.y < 550) {
                 this.y += 2;
             }
             else {
@@ -49,20 +48,20 @@ export class Player extends GameObject {
             case "ArrowLeft":
                 if (!this.jumping) {
                     this.horizontalSpeed = -5;
-                    this.div.classList.add("left");
-                    this.div.classList.remove("right", "jumpingRight", "JumpingLeft");
+                    this.element.classList.add("left");
+                    this.element.classList.remove("right", "jumpingRight", "JumpingLeft");
                 }
                 break;
             case "d":
             case "ArrowRight":
                 if (!this.jumping) {
                     this.horizontalSpeed = 5;
-                    this.div.classList.add("right");
-                    this.div.classList.remove("left", "jumpingLeft", "jumpingRight");
+                    this.element.classList.add("right");
+                    this.element.classList.remove("left", "jumpingLeft", "jumpingRight");
                 }
                 break;
             case " ":
-                if (this.y == 600) {
+                if (this.y == 550) {
                     this.jumping = true;
                 }
         }
@@ -80,12 +79,12 @@ export class Player extends GameObject {
     hit() {
         this.health--;
         console.log(this.health);
-        this.div.style.filter = "grayscale(100%)";
+        this.element.style.filter = "grayscale(100%)";
         if (this.health <= 0) {
             console.log("GAME OVER BITCH");
-            this.game.gameOver = true;
+            this.screen.gameOver = true;
         }
-        setTimeout(() => { this.div.style.filter = "grayscale(0%)"; }, 500);
+        setTimeout(() => { this.element.style.filter = "grayscale(0%)"; }, 500);
     }
     reset() {
         this.health = 2;

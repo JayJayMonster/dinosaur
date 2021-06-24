@@ -1,41 +1,40 @@
-import { GameObject } from "./gameObject.js";
-import {Game} from "./game.js";
+import { Gameobject } from "./gameobject.js";
+import { Gamescreen } from "./gamescreen.js";
 
-export class Player extends GameObject {
+export class Player extends Gameobject {
 
-    horizontalSpeed: number = 0;
-    health: number;
-    gameOver: boolean = false;
-    jumping : boolean = false;
-    falling: boolean = false;
-    game : Game
+    private horizontalSpeed: number = 0
+    private health: number
+    private jumping : boolean = false
+    private falling: boolean = false
+    private screen : Gamescreen
 
-    constructor(g: Game) {
+    constructor(screen: Gamescreen) {
         super("player");
-        this.game = g;
+        this.screen = screen
         // Add the event listeners to the window for the keyboard events
         window.addEventListener("keyup", (e: KeyboardEvent) => this.onKeyUpHandler(e))
         window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDownHandler(e))
     
         // generate x and y values
-        this.x = Math.floor(Math.random() * (window.innerWidth - this.div.clientWidth));
-        this.y = 600;
+        this.x = Math.floor(Math.random() * (window.innerWidth - this.element.clientWidth))
+        this.y = 550
         
-        this.health = 5;    
+        this.health = 5    
     }
     
     update() {
         // Add the vertical speed to the y-value
-        this.x += this.horizontalSpeed;
+        this.x += this.horizontalSpeed
         if (this.jumping){
-            if(this.y > 500){
+            if(this.y > 450){
                 this.y -= 4
-                if(this.div.classList.contains("left")){
-                    this.div.classList.add("jumpingLeft")
-                    this.div.classList.remove("left", "right", "jumpingRight")
-                } else if(this.div.classList.contains("right")){
-                    this.div.classList.add("jumpingRight")
-                    this.div.classList.remove("right", "left", "jumpingLeft")
+                if(this.element.classList.contains("left")){
+                    this.element.classList.add("jumpingLeft")
+                    this.element.classList.remove("left", "right", "jumpingRight")
+                } else if(this.element.classList.contains("right")){
+                    this.element.classList.add("jumpingRight")
+                    this.element.classList.remove("right", "left", "jumpingLeft")
                 }
                 //TODO If class left is on add left jumping sprite
                 //TODO If class right is on add right jumping sprite
@@ -45,11 +44,11 @@ export class Player extends GameObject {
             }
         }
         if(this.falling){
-            if(this.y < 600){
+            if(this.y < 550){
                 this.y += 2
             }else{
-                this.falling = false;
-                this.jumping = false;
+                this.falling = false
+                this.jumping = false
             }
         }
         super.update();
@@ -61,8 +60,8 @@ export class Player extends GameObject {
             case "ArrowLeft" :
             if(!this.jumping){
                 this.horizontalSpeed = -5
-                this.div.classList.add("left")
-                this.div.classList.remove("right", "jumpingRight", "JumpingLeft")
+                this.element.classList.add("left")
+                this.element.classList.remove("right", "jumpingRight", "JumpingLeft")
             
             }    
                 break
@@ -70,12 +69,12 @@ export class Player extends GameObject {
             case "ArrowRight":
             if (!this.jumping) {
                 this.horizontalSpeed = 5
-                this.div.classList.add("right")
-                this.div.classList.remove("left", "jumpingLeft", "jumpingRight")
+                this.element.classList.add("right")
+                this.element.classList.remove("left", "jumpingLeft", "jumpingRight")
             }
                 break
             case " ":
-                if(this.y == 600){
+                if(this.y == 550){
                     this.jumping = true;
                 }
         }
@@ -92,19 +91,19 @@ export class Player extends GameObject {
     }
 
     hit(){
-        this.health --;
-        console.log(this.health);
-        this.div.style.filter = "grayscale(100%)";
+        this.health --
+        console.log(this.health)
+        this.element.style.filter = "grayscale(100%)"
 
         if(this.health <= 0){
-            console.log("GAME OVER BITCH");
-            this.game.gameOver = true;
+            console.log("GAME OVER BITCH")
+            this.screen.gameOver = true
             }
         
-        setTimeout(()=> {this.div.style.filter = "grayscale(0%)"},500) 
+        setTimeout(()=> {this.element.style.filter = "grayscale(0%)"},500) 
     }
 
     public reset(){
-        this.health = 2;
+        this.health = 2
     }
 }
