@@ -50,7 +50,7 @@ export class Player extends Gameobject {
             case "a":
             case "ArrowLeft":
                 if (!this.jumping) {
-                    this.horizontalSpeed = -5;
+                    this.horizontalSpeed = -7;
                     this.element.classList.add("left");
                     this.element.classList.remove("right", "jumpingRight", "JumpingLeft");
                 }
@@ -58,7 +58,7 @@ export class Player extends Gameobject {
             case "d":
             case "ArrowRight":
                 if (!this.jumping) {
-                    this.horizontalSpeed = 5;
+                    this.horizontalSpeed = 7;
                     this.element.classList.add("right");
                     this.element.classList.remove("left", "jumpingLeft", "jumpingRight");
                 }
