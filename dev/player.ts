@@ -7,11 +7,11 @@ export class Player extends Gameobject {
     private health: number
     private jumping : boolean = false
     private falling: boolean = false
-    private screen : Gamescreen
+    private gamescreen : Gamescreen
 
-    constructor(screen: Gamescreen) {
+    constructor(gamescreen: Gamescreen) {
         super("player");
-        this.screen = screen
+        this.gamescreen = gamescreen
         // Add the event listeners to the window for the keyboard events
         window.addEventListener("keyup", (e: KeyboardEvent) => this.onKeyUpHandler(e))
         window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDownHandler(e))
@@ -36,8 +36,6 @@ export class Player extends Gameobject {
                     this.element.classList.add("jumpingRight")
                     this.element.classList.remove("right", "left", "jumpingLeft")
                 }
-                //TODO If class left is on add left jumping sprite
-                //TODO If class right is on add right jumping sprite
             }else{
                 this.falling = true
                 this.jumping = false
@@ -51,6 +49,11 @@ export class Player extends Gameobject {
                 this.jumping = false
             }
         }
+
+        if(this.x + this.element.clientWidth < 0 || this.x + this.element.clientWidth > 1600) {
+            this.gamescreen.gameOver = true
+        }
+
         super.update();
     }
 
@@ -92,18 +95,16 @@ export class Player extends Gameobject {
 
     hit(){
         this.health --
-        console.log(this.health)
         this.element.style.filter = "grayscale(100%)"
 
         if(this.health <= 0){
-            console.log("GAME OVER BITCH")
-            this.screen.gameOver = true
+            this.gamescreen.gameOver = true
             }
         
         setTimeout(()=> {this.element.style.filter = "grayscale(0%)"},500) 
     }
 
     public reset(){
-        this.health = 2
+        this.health = 5
     }
 }

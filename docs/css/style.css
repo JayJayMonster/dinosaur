@@ -13,6 +13,7 @@ gametitle {
     text-align: center;
     justify-content: center;
     align-items: center;
+    transition: all 0.5s;
 }
 
 menu{
@@ -27,12 +28,13 @@ menu{
 
 menutitle{
     z-index: 999;
-    color: white;
+    color:#0b0630;
     font-size: 4em;
     text-align: center;
+    transition: all 0.5s;
 }
 
-menubutton{
+.menubutton{
     z-index: 999;
     text-align: center;
     background-color: #0b0630;
@@ -45,6 +47,7 @@ menubutton{
     transition: all 0.5s;
     cursor: pointer;
     margin: 5px;
+    transition: all 0.5s;
 }
 
 header {
@@ -62,6 +65,7 @@ score {
     text-align: center;
     justify-content: center;
     align-items: center;
+    transition: all 0.5s;
 }
 
 gameOverScreen {

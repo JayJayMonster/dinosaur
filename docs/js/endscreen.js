@@ -14,11 +14,11 @@ export class EndScreen extends Gameobject {
         menu.appendChild(btn);
         text.innerText = "GAME OVER!";
         btn.innerText = "START AGAIN";
+        btn.classList.add("menubutton");
         btn.addEventListener("click", () => this.newGamescreen());
     }
     newGamescreen() {
-        this.element.innerHTML = "";
-        this.game.deleteEndScreen();
+        this.remove();
         this.game.showGameScreen();
     }
 }

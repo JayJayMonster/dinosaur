@@ -5,11 +5,11 @@ export class Astroid extends Gameobject {
     
     private xSpeed: number
     private ySpeed: number
-    public screen : Gamescreen
+    public gamescreen : Gamescreen
     
-    constructor(screen : Gamescreen) {
+    constructor(gamescreen : Gamescreen) {
         super("astroid");
-        this.screen = screen
+        this.gamescreen = gamescreen
               this.x = Math.random()*window.innerWidth;
               this.y = 270-Math.random()*30;
               this.xSpeed = 2;
@@ -21,7 +21,7 @@ export class Astroid extends Gameobject {
         this.x -= this.xSpeed;
         
         if(this.y + this.element.clientHeight > 600) {
-            // Place the astroid on the right side outside the screen
+            // Place the astroid on the right side outside the gamescreen
             this.y = -70;
             // Generate a random x-value
             this.x = 300 + Math.floor(Math.random() * (window.innerWidth - this.element.clientWidth))

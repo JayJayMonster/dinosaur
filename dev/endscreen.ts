@@ -1,11 +1,9 @@
 import { Gameobject } from "./gameobject.js"
 import { Game } from "./game.js"
-import { Gamescreen } from "./gamescreen.js"
 
 export class EndScreen extends Gameobject {
 
-    protected game : Game
-    protected gamescreen : Gamescreen
+    private game : Game
 
         constructor(game: Game) {
             super("endscreen")
@@ -15,14 +13,6 @@ export class EndScreen extends Gameobject {
         }
 
         private addGameoverScreen(){
-            // this.gameOverElement = document.createElement("gameOverScreen")
-            // this.gameOverElement.innerHTML = "GAME OVER!"
-            // const backgroundTag = document.querySelector("background")! as HTMLElement
-            // backgroundTag.appendChild(this.gameOverElement);  
-
-            // this.resetButton = document.createElement("resetButton")
-            // this.resetButton.innerHTML = "Start again"
-            // backgroundTag.appendChild(this.resetButton)
             const menu = document.createElement("menu")
             const text = document.createElement("menutitle")
             const btn = document.createElement("menubutton")
@@ -33,12 +23,12 @@ export class EndScreen extends Gameobject {
             
             text.innerText = "GAME OVER!"
             btn.innerText = "START AGAIN"
+            btn.classList.add("menubutton")
             btn.addEventListener("click", ()=>this.newGamescreen())
         }
 
         private newGamescreen(){
-            this.element.innerHTML = ""
-            this.game.deleteEndScreen()
+            this.remove()
             this.game.showGameScreen()
         }
 }

@@ -18,7 +18,7 @@ export class Gameobject {
         this.element.style.transform = `translate(${this.x}px, ${this.y}px)`
     }
 
-    remove(){
+    public remove(){
         this.element.remove();
     }
 }

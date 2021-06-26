@@ -1,11 +1,11 @@
 import { Gameobject } from "./gameobject.js";
 export class Player extends Gameobject {
-    constructor(screen) {
+    constructor(gamescreen) {
         super("player");
         this.horizontalSpeed = 0;
         this.jumping = false;
         this.falling = false;
-        this.screen = screen;
+        this.gamescreen = gamescreen;
         window.addEventListener("keyup", (e) => this.onKeyUpHandler(e));
         window.addEventListener("keydown", (e) => this.onKeyDownHandler(e));
         this.x = Math.floor(Math.random() * (window.innerWidth - this.element.clientWidth));
@@ -39,6 +39,9 @@ export class Player extends Gameobject {
                 this.falling = false;
                 this.jumping = false;
             }
+        }
+        if (this.x + this.element.clientWidth < 0 || this.x + this.element.clientWidth > 1600) {
+            this.gamescreen.gameOver = true;
         }
         super.update();
     }
@@ -78,16 +81,14 @@ export class Player extends Gameobject {
     }
     hit() {
         this.health--;
-        console.log(this.health);
         this.element.style.filter = "grayscale(100%)";
         if (this.health <= 0) {
-            console.log("GAME OVER BITCH");
-            this.screen.gameOver = true;
+            this.gamescreen.gameOver = true;
         }
         setTimeout(() => { this.element.style.filter = "grayscale(0%)"; }, 500);
     }
     reset() {
-        this.health = 2;
+        this.health = 5;
     }
 }
 //# sourceMappingURL=player.js.map

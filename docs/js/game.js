@@ -1,8 +1,15 @@
 import { EndScreen } from "./endscreen.js";
 import { Gamescreen } from "./gamescreen.js";
 import { StartScreen } from "./startscreen.js";
+import { ControlScreen } from "./controlscreen.js";
 export class Game {
     constructor() {
+        this.showStartScreen();
+    }
+    showControlScreen() {
+        this.screen = new ControlScreen(this);
+    }
+    showStartScreen() {
         this.screen = new StartScreen(this);
         this.gameLoop();
     }
@@ -11,9 +18,6 @@ export class Game {
     }
     showEndScreen() {
         this.screen = new EndScreen(this);
-    }
-    deleteEndScreen() {
-        this.screen.remove();
     }
     gameLoop() {
         this.screen.update();

@@ -1,8 +1,8 @@
 import { Gameobject } from "./gameobject.js";
 export class Astroid extends Gameobject {
-    constructor(screen) {
+    constructor(gamescreen) {
         super("astroid");
-        this.screen = screen;
+        this.gamescreen = gamescreen;
         this.x = Math.random() * window.innerWidth;
         this.y = 270 - Math.random() * 30;
         this.xSpeed = 2;
