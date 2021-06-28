@@ -56,7 +56,7 @@ export class Gamescreen extends Gameobject {
     }
     updateScreen() {
         this.spawner++;
-        if (this.spawner > 120) {
+        if (this.spawner > 240) {
             this.spawner = 0;
             this.ui.update();
             this.rock.push(new Rock());
